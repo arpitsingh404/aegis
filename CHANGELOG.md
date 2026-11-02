@@ -36,6 +36,11 @@ All notable changes to AEGIS. Format loosely follows [Keep a Changelog](https://
   from the registry (previously left a dangling entry).
 - **Failed/cancelled tasks skipped hooks** — `onTaskDone` now fires with
   `AEGIS_STATUS=failed|cancelled` too, not only on success.
+- **Auto-update never ran on real installs** — electron-builder only writes
+  `app-update.yml` for the **NSIS** target, so the portable-only build always failed
+  with `ENOENT … app-update.yml`. The build now produces both `AEGIS-Setup` (NSIS,
+  self-updating) and `AEGIS-Portable`, and the updater skips itself gracefully on
+  portable builds (they extract to `%TEMP%` and cannot self-replace).
 
 ### Verified (test evidence, 2026-11-02)
 
