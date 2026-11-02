@@ -19,7 +19,7 @@
     "start": "electron .",
     "web": "node server.js",
     "dev": "node server.js",
-    "build": "electron-builder --win portable",
+    "build": "electron-builder --win nsis,portable",
     "build:installer": "electron-builder --win nsis",
     "tui": "node tui.js",
     "test": "node --test test"
@@ -47,12 +47,8 @@
     ],
     "win": {
       "target": [
-        {
-          "target": "portable",
-          "arch": [
-            "x64"
-          ]
-        }
+        "nsis",
+        "portable"
       ],
       "icon": "build/icon.ico"
     },

@@ -141,6 +141,13 @@ function logLine(msg) {
    asks once before installing. Any failure is logged, never fatal. */
 function setupAutoUpdates() {
   if (!app.isPackaged) return;
+  // Only the NSIS install can self-update (electron-builder writes app-update.yml
+  // for nsis only; the portable build extracts to %TEMP% and runs from there).
+  const portable = String(process.execPath || '').includes('\\Temp\\');
+  if (portable) {
+    logLine('update: skipped (portable build cannot self-update)');
+    return;
+  }
   try {
     const { autoUpdater } = require('electron-updater');
     autoUpdater.autoDownload = true;
