@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self'; font-src 'self' data:;"
+    />
+    <title>AEGIS — coding agent</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="aurora" aria-hidden="true">
+      <span class="orb orb-1"></span>
+      <span class="orb orb-2"></span>
+      <span class="orb orb-3"></span>
+      <span class="stars"></span>
+    </div>
+
+    <div class="titlebar">
+      <div class="titlebar-brand">
+        <span class="tb-dot"></span>
+        <span>AEGIS</span>
+        <span class="tb-sep">/</span>
+        <span class="tb-page" id="tbPage">Home</span>
+      </div>
+      <div class="titlebar-spacer"></div>
+      <div class="tb-status" id="tbStatus">localhost</div>
+    </div>
+
+    <div class="shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-avatar" id="brandAvatar"></div>
+          <div class="brand-text">
+            <div class="brand-name">AEGIS</div>
+            <div class="brand-sub">Coding agent for your PC</div>
+          </div>
+        </div>
+
+        <nav class="nav" id="nav">
+          <button class="nav-item is-active" data-page="home">
+            <span class="ico" data-ico="home"></span><span class="nav-label">Home</span>
+          </button>
+          <button class="nav-item" data-page="console">
+            <span class="ico" data-ico="spark"></span><span class="nav-label">Chat</span>
+          </button>
+          <button class="nav-item" data-page="tasks">
+            <span class="ico" data-ico="terminal"></span><span class="nav-label">Tasks</span>
+            <span class="badge" id="taskBadge">0</span>
+          </button>
+          <button class="nav-item" data-page="files">
+            <span class="ico" data-ico="folder"></span><span class="nav-label">Files</span>
+          </button>
+          <button class="nav-item" data-page="agents">
+            <span class="ico" data-ico="users"></span><span class="nav-label">Agents</span>
+            <span class="chev">›</span>
+          </button>
+          <button class="nav-item" data-page="usage">
+            <span class="ico" data-ico="chart"></span><span class="nav-label">Usage</span>
+          </button>
+          <button class="nav-item" data-page="memory">
+            <span class="ico" data-ico="brain"></span><span class="nav-label">Memory</span>
+          </button>
+          <button class="nav-item" data-page="settings">
+            <span class="ico" data-ico="settings"></span><span class="nav-label">Settings</span>
+          </button>
+        </nav>
+
+        <div class="sidebar-foot">
+          <div class="workspace-card" id="workspaceCard"></div>
+          <div class="local-card">
+            <span class="ico" data-ico="shield"></span>
+            <div>
+              <b>Local only</b>
+              <small>127.0.0.1 · no cloud relay</small>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <div class="workspace">
+        <header class="topbar">
+          <button class="icon-btn" id="sidebarToggle" aria-label="Toggle sidebar" title="Hide sidebar (Ctrl+B)">
+            <span class="ico" data-ico="menu"></span>
+          </button>
+          <div class="search-wrap">
+            <label class="search" for="searchInput">
+              <span class="ico" data-ico="search"></span>
+              <input id="searchInput" aria-label="Search tasks, files and memory" type="text" placeholder="Search tasks, files, memory…" autocomplete="off" />
+              <kbd>Ctrl K</kbd>
+            </label>
+            <div class="search-results" id="searchResults" hidden></div>
+          </div>
+
+          <div class="topbar-right">
+            <button class="chip chip-stop" id="stopAll" aria-label="Emergency stop" title="Emergency stop: cancel every running task">
+              <span class="ico" data-ico="stop"></span><span>Stop</span>
+            </button>
+            <button class="icon-btn" id="ttsToggle" aria-label="Read replies aloud" title="Read replies aloud">
+              <span class="ico" data-ico="volume"></span>
+            </button>
+            <button class="icon-btn" id="themeToggle" aria-label="Toggle theme" title="Light / dark">
+              <span class="ico" data-ico="sun"></span>
+            </button>
+            <button class="chip chip-new" data-action="new-task" title="Start a new task">
+              <span class="ico" data-ico="plus"></span><span>New task</span>
+            </button>
+            <div class="chip chip-live" id="chipAi">
+              <span class="dot"></span><span id="aiChipText">AI Online</span>
+            </div>
+            <div class="approval-wrap-chip">
+              <button class="chip" id="approvalChip" title="Change approval mode">
+                <span class="ico" data-ico="shield"></span><span id="approvalText">Ask</span>
+              </button>
+              <div class="mini-pop" id="approvalPop" hidden>
+                <div class="mini-title">Approval mode</div>
+                <button class="mini-opt" data-mode="ask">Ask first <small>write &amp; commands need approval</small></button>
+                <button class="mini-opt" data-mode="auto">Auto-run <small>agent acts on its own</small></button>
+                <button class="mini-opt" data-mode="readonly">Read-only <small>no writes, no commands</small></button>
+              </div>
+            </div>
+            <div class="notif-wrap">
+              <button class="icon-btn" id="bellBtn" aria-label="Notifications" title="Runs & approvals">
+                <span class="ico" data-ico="bell"></span><span class="bell-dot" hidden></span>
+              </button>
+              <div class="notif-pop" id="notifPop" hidden></div>
+            </div>
+            <button class="profile" data-page="settings">
+              <span class="avatar" id="profileAvatar">A</span>
+              <span class="profile-text">
+                <b id="profileName">AEGIS</b>
+                <small id="profilePlan">local</small>
+              </span>
+            </button>
+          </div>
+        </header>
+
+        <main class="content" id="content"></main>
+      </div>
+    </div>
+
+    <div class="approval-wrap" id="approvalWrap" hidden>
+      <div class="approval">
+        <div class="approval-head">
+          <span class="ico" id="approvalIcon"></span>
+          <div>
+            <b id="approvalTitle">Permission needed</b>
+            <small id="approvalKind"></small>
+          </div>
+        </div>
+        <pre class="approval-detail" id="approvalDetail"></pre>
+        <div class="approval-actions">
+          <button class="btn btn-ghost" data-approve="deny">Deny</button>
+          <button class="btn btn-ghost" data-approve="always">Always allow</button>
+          <button class="btn" data-approve="allow">Allow once</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="toasts" id="toasts"></div>
+    <script src="app.js"></script>
+  </body>
+</html>

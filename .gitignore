@@ -1,0 +1,25 @@
+# deps / builds
+node_modules/
+dist/
+*.vsix
+.vscode/
+
+# logs & scratch
+shots/
+*.log
+*.tmp
+hook-test.log
+plan-test.txt
+
+# editor / os
+.DS_Store
+Thumbs.db
+*.swp
+
+# never commit keys or local data
+.env
+.env.*
+*.pem
+*.key
+credentials.*
+.aegis/

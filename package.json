@@ -1,0 +1,83 @@
+{
+  "name": "aegis-ai",
+  "productName": "AEGIS",
+  "version": "2.0.0",
+  "private": true,
+  "description": "AEGIS - a premium local AI coding agent for Windows (multi-model, sessions, tools).",
+  "author": "Arpit",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/arpitsingh404/aegis.git"
+  },
+  "bugs": {
+    "url": "https://github.com/arpitsingh404/aegis/issues"
+  },
+  "homepage": "https://github.com/arpitsingh404/aegis#readme",
+  "main": "electron-main.js",
+  "scripts": {
+    "start": "electron .",
+    "web": "node server.js",
+    "dev": "node server.js",
+    "build": "electron-builder --win portable",
+    "build:installer": "electron-builder --win nsis",
+    "tui": "node tui.js",
+    "test": "node --test test"
+  },
+  "devDependencies": {
+    "electron": "33.4.11",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "com.aegis.codingagent",
+    "productName": "AEGIS",
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "src/**/*",
+      "renderer/**/*",
+      "server.js",
+      "electron-main.js",
+      "tui.js",
+      "skills/**/*",
+      "build/icon.ico",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "build/icon.ico"
+    },
+    "portable": {
+      "artifactName": "AEGIS-Portable-${version}.exe"
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "arpitsingh404",
+        "repo": "aegis",
+        "releaseType": "release"
+      }
+    ],
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "artifactName": "AEGIS-Setup-${version}.exe"
+    }
+  },
+  "allowScripts": {
+    "electron@38.8.6": true
+  },
+  "dependencies": {
+    "electron-updater": "^6.8.11"
+  }
+}

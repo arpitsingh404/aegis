@@ -1,0 +1,55 @@
+{
+  "name": "aegis",
+  "displayName": "AEGIS — local AI coding agent",
+  "description": "Run AEGIS tasks from VS Code: status bar, one-shot tasks, and the full AEGIS panel.",
+  "version": "2.0.0",
+  "publisher": "arpitsingh404",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/arpitsingh404/aegis.git"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other",
+    "SCM Providers"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "aegis.openPanel",
+        "title": "AEGIS: Open Panel",
+        "category": "AEGIS"
+      },
+      {
+        "command": "aegis.newTask",
+        "title": "AEGIS: New Task",
+        "category": "AEGIS"
+      },
+      {
+        "command": "aegis.status",
+        "title": "AEGIS: Show Status",
+        "category": "AEGIS"
+      }
+    ],
+    "configuration": {
+      "title": "AEGIS",
+      "properties": {
+        "aegis.url": {
+          "type": "string",
+          "default": "http://127.0.0.1:7791",
+          "description": "Base URL of the running AEGIS server."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "package": "vsce package"
+  }
+}
